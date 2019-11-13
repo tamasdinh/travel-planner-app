@@ -1,0 +1,2 @@
+
+alert('App online!')

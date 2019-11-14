@@ -1,11 +1,32 @@
+$std-border: 1px solid darkgrey;
+
+body, section, footer {
+  border: $std-border;
+}
+
 body {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
-  display: block;
+  display: flex;
+  height: 20vh;
 }
 
 footer {
   display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0;
+  padding-left: 10px;
+}
+
+
+/* Trip layout */
+
+.trip-container {
+  display: grid;
+  grid-template-columns: 10vw 10vw 20vw 20vw 40vw;
 }

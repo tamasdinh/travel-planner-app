@@ -11,22 +11,29 @@
     <header>
       [HEADER] Travel app
       <section>Countdown</section>
+      <section>
+        <button id='remove-trip'>Remove trip data</button>
+      </section>
     </header>
 
     <section class='trip-container'>
       Destination-hero
       <section class='destination-box'>
         Destination-box
-        <section class='destination-date'>
-          <section>Choose year</section>
-          <section>Choose month</section>
-          <section>Choose day</section>
-        </section>
+        <section class='destination-date'></section>
         <section class='destination-select'>
-          Choose destination
+          <label for='destination-selector'>Where would you like to go?</label>
+          <input
+            id='destination-selector'
+            list='destination-options'
+            type="text"
+            placeholder="Please start typing...">
+          <datalist id='destination-options'></datalist>
+          <button id='destination-submit'>Submit</button>
         </section>
         <section class='destination-duration'>
-          How long are you staying?
+          <label for='duration-selector'>How long are you staying?</label>
+          <select value=7>Choose your trip duration</select>
         </section>
       </section>
       <section class='hero-shot'>HeroPhoto</section>

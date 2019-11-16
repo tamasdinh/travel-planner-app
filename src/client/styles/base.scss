@@ -28,5 +28,11 @@ footer {
 
 .trip-container {
   display: grid;
-  grid-template-columns: 10vw 10vw 20vw 20vw 40vw;
+  grid-template-columns: 10vw 20vw 20vw 20vw 30vw;
+}
+
+.select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

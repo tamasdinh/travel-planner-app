@@ -122,7 +122,7 @@ function createOptions (sel, starter, range, currentPeriod, tripID, now) {
 
     if (sel == 'select-day') {
       if (JSON.parse(localStorage[tripID]).year == now.getFullYear() &&
-          JSON.parse(localStorage[tripID]).month == now.getMonth() &&
+          JSON.parse(localStorage[tripID]).month == now.getMonth() + 1 &&
           item.value < currentPeriod) {
             item.disabled = true
       }

@@ -17,7 +17,6 @@
     </header>
 
     <section class='trip-container'>
-      Destination-hero
       <section class='destination-box'>
         Destination-box
         <section class='destination-date'></section>
@@ -28,7 +27,10 @@
             list='destination-options'
             type="text"
             placeholder="Please start typing...">
-          <datalist id='destination-options'></datalist>
+          <div>
+            <datalist id='destination-options'></datalist>
+            <button id='remove-destination-text'>X</button>
+          </div>
           <button id='destination-submit'>Submit</button>
         </section>
         <section class='destination-duration'>
@@ -36,8 +38,8 @@
           <select id='duration-selector'>Choose your trip duration</select>
         </section>
       </section>
-      <section class='hero-shot'>HeroPhoto</section>
-      <section class='photo-grid'>Photogrid</section>
+      <section id='hero-shot' class='hero-shot'></section>
+      <section id='photogrid' class='photogrid'></section>
       <section class='weather-results'>Weather information</section>
     </section>
 

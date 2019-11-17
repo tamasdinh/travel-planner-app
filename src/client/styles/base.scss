@@ -28,11 +28,32 @@ footer {
 
 .trip-container {
   display: grid;
-  grid-template-columns: 10vw 20vw 20vw 20vw 30vw;
+  min-height: 40vh;
+  grid-template-columns: 20vw 20vw 20vw 30vw;
 }
 
 .select {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+
+.hero-shot {
+  display: flex;
+
+  img {
+    width: 100%;
+    max-height: 100%;
+  }
+}
+
+.photogrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  img {
+    max-width: 20%;
+    max-height: 20%;
+  }
 }

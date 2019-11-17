@@ -6,8 +6,8 @@ export function loadTripData (now) {
   for (let item of Object.keys(localStorage)) {
     if (item.search(/trip/) >= 0) {
       console.log('Saved trip exists in local storage. Loading data...')
-      console.log(localStorage)
       tripID = item
+      console.log('Trip data:', JSON.parse(localStorage.getItem(tripID)))
       break
     }
   }
@@ -15,7 +15,7 @@ export function loadTripData (now) {
     console.log('No trips saved; creating trip datastore.')
     tripID = generateTripID()
     localStorage.setItem(tripID, JSON.stringify({year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()}))
+    console.log('Trip data:', JSON.parse(localStorage.getItem(tripID)))
   }
-  console.log('Trip ID:', tripID)
   return tripID
 }

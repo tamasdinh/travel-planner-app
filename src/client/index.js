@@ -8,6 +8,7 @@ import { loadTripData } from './js/loadTripData'
 import { populateSelectors } from './js/dateSelectors'
 import { getDestinations, tearDownDataList, serveDestinationOptions, destinationSubmit } from './js/destinationSelect'
 import { durationSelector, durationSubmit } from './js/durationSelector'
+import { getWeather, serveWeatherData } from './js/getWeather'
 
 const now = new Date()
 let tripID
@@ -43,14 +44,20 @@ document.getElementById('destination-selector').addEventListener('input', (event
   }
   prevLength = event.target.value.length
   if (event.target.value.length < 4) {
-    console.log('Clearing destResults')
     destResults = []
     tearDownDataList()
   }
 })
 
 document.getElementById('destination-submit').addEventListener('click', () => {
-  destinationSubmit(tripID, destResults).then(console.log('Trip data saved.'))
+  destinationSubmit(tripID, destResults)
+  .then(console.log('Trip data saved.'))
+  .then(getWeather(tripID)
+  .then((weatherData) => serveWeatherData(weatherData)))
+  .catch(e => {
+    alert('An error has occurred while trying to fetch weather data. Please try again.')
+    console.log(e)
+  })
 })
 
 document.getElementById('duration-selector').addEventListener('change', (event) => durationSubmit(event, tripID))

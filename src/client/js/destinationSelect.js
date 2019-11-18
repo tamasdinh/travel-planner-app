@@ -1,9 +1,8 @@
 import { getPhotos } from './getPhotos'
+import { serverURL, port } from './localhost'
 
 export function getDestinations (event) {
 
-  const serverURL = 'http://localhost'
-  const port = 8081
   const placeEndPoint = 'places'
 
   let urlToUse = new URL(`${serverURL}:${port}/${placeEndPoint}`)
@@ -42,14 +41,12 @@ export function getDestinations (event) {
 
 export function tearDownDataList () {
   const optDropDown = document.getElementById('destination-options')
-  console.log('Destroying datalist')
   while (optDropDown.firstChild) {
     optDropDown.removeChild(optDropDown.firstChild)
   }
 }
 
 export function serveDestinationOptions (event, results) {
-  console.log('datalist received this many results:', results.length)
   
   const relevantResults = results.filter(resultItem => {
     const queryItems = event.target.value.split(' ').map(item => (
@@ -63,11 +60,9 @@ export function serveDestinationOptions (event, results) {
       }
       return inclusionCounter == queryItems.length
   })
-  console.log(relevantResults)
 
   const optDropDown = document.getElementById('destination-options')
   
-  console.log('Building datalist; input length:', event.target.value.length)
   let resultsToReturn = Math.min(relevantResults.length, 10)
   const destOptions = document.createDocumentFragment()
   for (let i = 0; i < resultsToReturn; i++) {
@@ -95,7 +90,6 @@ export function destinationSubmit (tripID, destinationResults) {
           item.countryName == selectionSplit[1]
       ))[0]
       trip.images = images
-      console.log('Trip data saved:', trip)
       localStorage.setItem(tripID, JSON.stringify(trip))
       localStorage.removeItem('results')
       resolve()

@@ -1,17 +1,73 @@
 $std-border: 1px solid darkgrey;
 
+$font-color: #ddd;
+$font-family: sans-serif;
+
+$themeColorDark: #111;
+$themeColorLight: #ddd;
+$themeColorAccent1: #2c3c97;
+$themeColorAccent2: #854b08;
+$themeColorAccent3: #882c08;
+
+/*
 body, section, footer {
   border: $std-border;
 }
+*/
 
 body {
   display: flex;
   flex-direction: column;
+  color: $font-color;
+  font-family: $font-family;
+  font-size: 18px;
+  background-color: $themeColorDark;
 }
 
 header {
   display: flex;
-  height: 20vh;
+  flex-direction: row;
+  height: 10vh;
+  min-height: 100px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+
+  & .title {
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 0.3em;
+  } 
+
+  & .countdown {
+    font-size: 1em;
+  }
+
+  & .title-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  & button {
+    position: absolute;
+    right: 20px;
+    background-color: #634d04;
+  }
+}
+
+span {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: $themeColorAccent2;
+}
+
+select, input, button {
+  font-size: 0.8em;
+}
+
+label {
+  font-size: 1em;
 }
 
 footer {
@@ -26,16 +82,63 @@ footer {
 
 /* Trip layout */
 
-.trip-container {
-  display: grid;
-  min-height: 40vh;
-  grid-template-columns: 20vw 20vw 20vw 30vw;
+.destination-box {
+  display: flex;
+  min-height: 10vh;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.select {
+.destination-select {
+  justify-content: space-evenly;
+  flex-grow: 0.5;
+}
+
+.input-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+
+  & input {
+    margin-right: 5px;
+    flex-grow: 0.7;
+  }
+
+  & button {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: $themeColorAccent3;
+  }
+}
+
+.destination-date,
+.destination-duration,
+.destination-select {
+  display: flex;
+  flex-direction: column;
+}
+
+select {
+  background-color: #444;
+  color: $themeColorLight;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #1840ad;
+  color: $themeColorLight;
+  border-radius: 10px;
+
+}
+
+#destination-submit {
+  margin: 20px 20px 20px 20px;
 }
 
 .hero-shot {

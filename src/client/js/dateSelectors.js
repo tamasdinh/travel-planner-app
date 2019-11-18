@@ -110,10 +110,16 @@ export function populateSelectors (now, tripID) {
 }
 
 function createOptions (sel, starter, range, currentPeriod, tripID, now) {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December']
   const scaffold = document.createDocumentFragment()
   for (let y = starter; y <= range; y++) {
     const item = document.createElement('option')
-    item.innerHTML = y
+    if (sel == 'select-month') {
+      item.innerHTML = months[y-1]
+    } else {
+      item.innerHTML = y
+    }
     item.value = y
 
     if (sel == 'select-month') {

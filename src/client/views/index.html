@@ -9,37 +9,38 @@
 
   <body>
     <header>
-      <section class="title">Travel planner</section>
-      <section class="countdown">You only have to sleep <span id="sleeps"></span> times until your trip!</section>
+      <section class="title-container">
+        <section class="title">Travel planner</section>
+        <section class="countdown"><span id="sleeps"></span> days until your trip!</section>
+      </section>
+      <button id='remove-trip'>Reset trip data</button>
     </header>
 
-    <section class='trip-container'>
-      <section class='destination-box'>
-        Destination-box
-        <section class='destination-date'></section>
-        <section class='destination-select'>
-          <label for='destination-selector'>Where would you like to go?</label>
+    <section class='destination-box'>
+      <section class='destination-select'>
+        <label for='destination-selector'>Where would you like to go?</label>
+        <section class="input-container">
           <input
-            id='destination-selector'
-            list='destination-options'
-            type="text"
-            placeholder="Please start typing...">
-          <div>
-            <datalist id='destination-options'></datalist>
-            <button id='remove-destination-text'>X</button>
-          </div>
-          <button id='destination-submit'>Submit</button>
+          id='destination-selector'
+          list='destination-options'
+          type="text"
+          placeholder="Please start typing...">
+          <button id='remove-destination-text'>Clear text</button>
         </section>
-        <section class='destination-duration'>
-          <label for='duration-selector'>How long are you staying?</label>
-          <select id='duration-selector'>Choose your trip duration</select>
-        </section>
-        <button id='remove-trip'>Remove trip data</button>
+        <datalist id='destination-options'></datalist>
       </section>
-      <section id='hero-shot' class='hero-shot'></section>
-      <section id='photogrid' class='photogrid'></section>
-      <section class='weather-results'>Weather information</section>
+      <section class='destination-date'>
+        <label for='destination-date'>When are you departing?</label>
+      </section>
+      <section class='destination-duration'>
+        <label for='duration-selector'>How long are you staying?</label>
+        <select id='duration-selector'>Choose your trip duration</select>
+      </section>
     </section>
+    <button id='destination-submit'>Give me my trip data!</button>
+    <section id='hero-shot' class='hero-shot'></section>
+    <section id='photogrid' class='photogrid'></section>
+    <section class='weather-results'></section>
 
   </body>
 

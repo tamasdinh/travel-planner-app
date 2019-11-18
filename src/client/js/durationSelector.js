@@ -1,7 +1,7 @@
 export function durationSelector (tripID) {
   const selector = document.getElementById('duration-selector')
   const range = 14
-  const defaultValue = 7
+  const defaultDuration = 7
   
   const temp = document.createDocumentFragment()
   for (let i = 1; i <= range; i++) {
@@ -12,11 +12,9 @@ export function durationSelector (tripID) {
   }
   
   selector.appendChild(temp)
-  selector.value = defaultValue
-  
+
   const trip = JSON.parse(localStorage.getItem(tripID))
-  trip.duration = selector.value
-  localStorage.setItem(tripID, JSON.stringify(trip)) 
+  selector.value = trip.duration || defaultDuration 
 }
 
 export function durationSubmit (event, tripID) {

@@ -1,3 +1,5 @@
+import { loadCountDown } from "./loadTripData"
+
 export function generateTripID () {
   return 'trip_' + new Date().getTime().toString()
  }
@@ -97,6 +99,7 @@ export function populateSelectors (now, tripID) {
         }
       }
       localStorage.setItem(tripID, JSON.stringify(trip))
+      loadCountDown(trip)
       console.log('New trip data:', localStorage[tripID])
     })
 

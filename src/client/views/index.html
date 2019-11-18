@@ -9,11 +9,8 @@
 
   <body>
     <header>
-      [HEADER] Travel app
-      <section>Countdown</section>
-      <section>
-        <button id='remove-trip'>Remove trip data</button>
-      </section>
+      <section class="title">Travel planner</section>
+      <section class="countdown">You only have to sleep <span id="sleeps"></span> times until your trip!</section>
     </header>
 
     <section class='trip-container'>
@@ -37,6 +34,7 @@
           <label for='duration-selector'>How long are you staying?</label>
           <select id='duration-selector'>Choose your trip duration</select>
         </section>
+        <button id='remove-trip'>Remove trip data</button>
       </section>
       <section id='hero-shot' class='hero-shot'></section>
       <section id='photogrid' class='photogrid'></section>

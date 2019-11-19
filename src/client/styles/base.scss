@@ -10,12 +10,6 @@ $themeColorAccent1: #2c3c97;
 $themeColorAccent2: #854b08;
 $themeColorAccent3: #882c08;
 
-/*
-body, section, footer {
-  border: $std-border;
-}
-*/
-
 body {
   display: flex;
   flex-direction: column;
@@ -57,6 +51,12 @@ header {
   }
 }
 
+h1 {
+  text-align: center;
+  color: $themeColorAccent2;
+  font-size: 1.5em;
+}
+
 span {
   font-weight: bold;
   font-size: 1.5em;
@@ -73,11 +73,13 @@ label {
 
 footer {
   display: flex;
-  position: fixed;
+  position: static;
   width: 100%;
   bottom: 0px;
   left: 0;
   padding-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -193,6 +195,61 @@ button {
     padding-right: 8px;
     padding-bottom: 8px;
     max-height: 10vh;
+  }
+
+}
+
+.weather-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  .weather-subcontainer {
+    display: flex;
+    flex: 15%;
+    max-width: 14vw;
+    flex-direction: column;
+    text-align: center;
+    background-color: $themeColorLight;
+    padding: 0.5em;
+    margin: 10px;
+
+    .temperature {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    
+    p {
+      margin: 0;
+    }
+
+    .summary {
+      font-style: italic;
+      font-size: 0.7em;
+      color: $themeColorDark;
+      margin-top: 5px;
+    }
+    
+    .temp-low {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: $themeColorAccent3
+    }
+    
+    .temp-high {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: $themeColorAccent1;
+    }
+
+    .date {
+      font-size: 0.9em;
+      color: $themeColorAccent1;
+      margin-bottom: 5px;
+    }
+
+
   }
 
 }

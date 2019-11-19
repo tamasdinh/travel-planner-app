@@ -1,4 +1,4 @@
-import { serverURL, port } from './localhost'
+import { serverURL, port, months, days } from './localhost'
 
 export function getWeather (tripID) {
   
@@ -47,4 +47,57 @@ export function getWeather (tripID) {
 
 export function serveWeatherData(weatherData) {
   console.log('Results from weatherData:', weatherData)
+  const weatherTitle = document.createElement('h1')
+  weatherTitle.innerHTML = 'Expected weather for your trip'
+  document.getElementsByTagName('body')[0].insertBefore(
+    weatherTitle, document.getElementsByClassName('weather-results')[0]
+  )
+  const mainFragment = document.createDocumentFragment()
+  for (let item of weatherData) {
+    const subDiv = document.createElement('div')
+    subDiv.className = 'weather-subcontainer'
+    const tempDiv = document.createElement('div')
+    tempDiv.className = 'temperature'
+    
+    const dateItem = document.createElement('p')
+    dateItem.innerHTML = getDateString(item.time)
+    dateItem.className = 'date'
+
+    const tempLow = document.createElement('p')
+    tempLow.innerHTML = item.tempLow.toFixed(1) + '˚C'
+    tempLow.className = 'temp-low'
+    
+    const tempHigh = document.createElement('p')
+    tempHigh.innerHTML = item.tempHigh.toFixed(1) + '˚C'
+    tempHigh.className = 'temp-high'
+
+    const summary = document.createElement('p')
+    summary.innerHTML = item.summary
+    summary.className = 'summary'
+
+    for (let tempItem of [tempLow, tempHigh]) {
+      tempDiv.appendChild(tempItem)
+    }
+
+    for (let htmlItem of [dateItem, tempDiv, summary]) {
+      subDiv.appendChild(htmlItem)
+    }
+
+    mainFragment.appendChild(subDiv)
+  }
+  document.getElementsByClassName('weather-results')[0].appendChild(mainFragment)
+}
+
+function getDateString (epoch) {
+  const date = new Date(epoch * 1000)
+  let dateString = {
+    year: date.getFullYear(),
+    month: months[date.getMonth()],
+    date: date.getDate(),
+    day: days[date.getDay()]
+  }
+  return dateString = dateString.date + ' ' +
+                      dateString.month + ' ' +
+                      dateString.year + '<br />' + ' ' +
+                      dateString.day
 }

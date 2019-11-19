@@ -1,4 +1,5 @@
 import { loadCountDown } from "./loadTripData"
+import { months } from './localhost'
 
 export function generateTripID () {
   return 'trip_' + new Date().getTime().toString()
@@ -110,8 +111,6 @@ export function populateSelectors (now, tripID) {
 }
 
 function createOptions (sel, starter, range, currentPeriod, tripID, now) {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December']
   const scaffold = document.createDocumentFragment()
   for (let y = starter; y <= range; y++) {
     const item = document.createElement('option')

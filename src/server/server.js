@@ -95,7 +95,7 @@ app.get('/weather', (req, res) => {
   let runningDate = new Date(parseInt(startDate))
   
   for (let i = 0; i < duration; i++) {
-    runningDate.setDate(runningDate.getDate() + i)
+    runningDate.setDate(runningDate.getDate() + 1)
     let urlToUse = new URL(`${darkSkyBaseURL}/forecast/${darkSkyAPIKey}/${lat},${long},${runningDate.getTime()/1000}`)
     Object.keys(params).forEach(key => urlToUse.searchParams.append(key, params[key]))
     fetchArray.push(fetch(urlToUse).then(result => result.json()))

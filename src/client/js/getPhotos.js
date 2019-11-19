@@ -24,9 +24,11 @@ export function getPhotos (tripID, destinationQuery, images) {
       const img = document.createElement('img')
       img.src = images[0]
       heroShot.appendChild(img)
+      const destination = document.getElementById('destination-selector').value.split(', ')
+      document.getElementById('hero-overlay').innerHTML = `${destination[0].toUpperCase()}`
       
       const imgDocFragment = document.createDocumentFragment()
-      for (let i = 1; i < images.length; i++) {
+      for (let i = 0; i < images.length; i++) {
         const img = document.createElement('img')
         img.src = images[i]
         imgDocFragment.appendChild(img)

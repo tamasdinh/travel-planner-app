@@ -5,6 +5,7 @@ $font-family: sans-serif;
 
 $themeColorDark: #111;
 $themeColorLight: #ddd;
+$themeColorLightOverlay: #dddddd80;
 $themeColorAccent1: #2c3c97;
 $themeColorAccent2: #854b08;
 $themeColorAccent3: #882c08;
@@ -141,22 +142,44 @@ button {
   margin: 20px 20px 20px 20px;
 }
 
-.hero-shot {
+.photoshow {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hero-shot {
+  position: relative;
+  text-align: center;
+  color: $themeColorLightOverlay;
+  font-size: 10em;
+  letter-spacing: 0.1em;
+  
+  #hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   img {
-    width: 100%;
-    max-height: 100%;
+    max-width: 100%;
   }
 }
 
 .photogrid {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
+  padding-top: 8px;
 
   img {
-    max-width: 20%;
-    max-height: 20%;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    max-height: 10vh;
   }
+
 }

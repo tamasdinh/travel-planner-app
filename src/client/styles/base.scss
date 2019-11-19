@@ -5,7 +5,7 @@ $font-family: sans-serif;
 
 $themeColorDark: #111;
 $themeColorLight: #ddd;
-$themeColorLightOverlay: #dddddd80;
+$themeColorLightOverlay: #ddddddaf;
 $themeColorAccent1: #2c3c97;
 $themeColorAccent2: #854b08;
 $themeColorAccent3: #882c08;
@@ -154,14 +154,27 @@ button {
   position: relative;
   text-align: center;
   color: $themeColorLightOverlay;
-  font-size: 10em;
-  letter-spacing: 0.1em;
   
   #hero-overlay {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    
+    #hero-overlay-text {
+      letter-spacing: 0.1em;
+      font-size: 10em;
+    }
+    
+    p {
+      margin: 0;
+    }
+
+    #base-text {
+      font-size: 3em;
+      letter-spacing: 0.15em;
+    }
+
   }
 
   img {

@@ -1,11 +1,6 @@
-import { loadCountDown } from "./loadTripData"
 import { months } from './localhost'
 
-export function generateTripID () {
-  return 'trip_' + new Date().getTime().toString()
- }
-
-export function populateSelectors (now, tripID) {
+export function populateSelectors (now, trip) {
   const scaffold = document.createDocumentFragment()
   
   for (let sel of ['select-year', 'select-month', 'select-day']) {
@@ -33,75 +28,24 @@ export function populateSelectors (now, tripID) {
       }
     }
 
-    selector.appendChild(createOptions(sel, starter, range, currentPeriod, tripID, now))
+    selector.appendChild(createOptions(sel, starter, range, currentPeriod, trip, now))
 
     switch (sel) {
       case 'select-year': {
-        selector.value = JSON.parse(localStorage[tripID]).year
+        selector.value = trip.year
         break
       }
       case 'select-month': {
-        selector.value = JSON.parse(localStorage[tripID]).month
+        selector.value = trip.month
         break
       }
       default: {
-        selector.value = JSON.parse(localStorage[tripID]).day
+        selector.value = trip.day
       }
     }
     
     selector.addEventListener('change', (event) => {
-      let trip
-      trip = JSON.parse(localStorage[tripID])
-      switch (sel) {
-        case 'select-year': {
-          trip.year = event.target.value
-          for (let sibling of [selector.nextSibling, selector.nextSibling.nextSibling]) {
-            if (sibling.id.includes('month')) {
-              currentPeriod = now.getMonth() + 1
-            } else if (sibling.id.includes('day')) {
-              currentPeriod = now.getDate()
-            }
-            for (let item of sibling) {
-              if (event.target.value == now.getFullYear() &&
-              item.value < currentPeriod) {
-                item.disabled = true
-                sibling.value = currentPeriod
-                if (sibling === selector.nextSibling) {
-                  trip.month = currentPeriod
-                } else {
-                  trip.day = currentPeriod
-                }
-              } else {
-                item.disabled = false
-              }
-            }
-          } 
-          break
-        }
-        case 'select-month': {
-          trip.month = event.target.value
-          let sibling = selector.nextSibling
-          currentPeriod = now.getDate()
-          for (let item of sibling) {
-            if (JSON.parse(localStorage[tripID]).year == now.getFullYear() &&
-                event.target.value == now.getMonth() + 1 &&
-                item.value < currentPeriod) {
-                  item.disabled = true
-                  sibling.value = currentPeriod
-                  trip.day = currentPeriod
-            } else {
-              item.disabled = false
-            }
-          } 
-          break
-        }
-        default: {
-          trip.day = event.target.value
-        }
-      }
-      localStorage.setItem(tripID, JSON.stringify(trip))
-      loadCountDown(trip)
-      console.log('New trip data:', localStorage[tripID])
+      dateChangeHandler(event, sel, selector, currentPeriod, now, trip)
     })
 
     scaffold.appendChild(selector)
@@ -110,7 +54,7 @@ export function populateSelectors (now, tripID) {
   document.getElementsByClassName('destination-date')[0].appendChild(scaffold)
 }
 
-function createOptions (sel, starter, range, currentPeriod, tripID, now) {
+function createOptions (sel, starter, range, currentPeriod, trip, now) {
   const scaffold = document.createDocumentFragment()
   for (let y = starter; y <= range; y++) {
     const item = document.createElement('option')
@@ -122,15 +66,15 @@ function createOptions (sel, starter, range, currentPeriod, tripID, now) {
     item.value = y
 
     if (sel == 'select-month') {
-      if (JSON.parse(localStorage[tripID]).year == now.getFullYear() &&
+      if (trip.year == now.getFullYear() &&
           item.value < currentPeriod) {
             item.disabled = true
       }
     }
 
     if (sel == 'select-day') {
-      if (JSON.parse(localStorage[tripID]).year == now.getFullYear() &&
-          JSON.parse(localStorage[tripID]).month == now.getMonth() + 1 &&
+      if (trip.year == now.getFullYear() &&
+          trip.month == now.getMonth() + 1 &&
           item.value < currentPeriod) {
             item.disabled = true
       }
@@ -139,4 +83,63 @@ function createOptions (sel, starter, range, currentPeriod, tripID, now) {
     scaffold.appendChild(item)
   }
   return scaffold
+}
+
+function dateChangeHandler(event, sel, selector, currentPeriod, now, trip) {
+  switch (sel) {
+    case 'select-year': {
+      trip.year = event.target.value
+      for (let sibling of [selector.nextSibling, selector.nextSibling.nextSibling]) {
+        if (sibling.id.includes('month')) {
+          currentPeriod = now.getMonth() + 1
+        } else if (sibling.id.includes('day')) {
+          currentPeriod = now.getDate()
+        }
+        for (let item of sibling) {
+          if (event.target.value == now.getFullYear() &&
+          item.value < currentPeriod) {
+            item.disabled = true
+            sibling.value = currentPeriod
+            if (sibling === selector.nextSibling) {
+              trip.month = currentPeriod
+            } else {
+              trip.day = currentPeriod
+            }
+          } else {
+            item.disabled = false
+          }
+        }
+      } 
+      break
+    }
+    case 'select-month': {
+      trip.month = event.target.value
+      let sibling = selector.nextSibling
+      currentPeriod = now.getDate()
+      for (let item of sibling) {
+        if (trip.year == now.getFullYear() &&
+            event.target.value == now.getMonth() + 1 &&
+            item.value < currentPeriod) {
+              item.disabled = true
+              sibling.value = currentPeriod
+              trip.day = currentPeriod
+        } else {
+          item.disabled = false
+        }
+      } 
+      break
+    }
+    default: {
+      trip.day = event.target.value
+    }
+  }
+  localStorage.setItem(trip.id, JSON.stringify(trip))
+  loadCountDown(trip)
+  console.log('New trip data:', trip)
+}
+
+export function loadCountDown(trip) {
+  document.getElementById('sleeps').innerHTML =
+        ((new Date(trip.year, trip.month - 1, trip.day) - new Date()) / 1000 / 60 / 60 / 24 + 1).toFixed(0)
+        document.getElementById('sleeps-text').innerHTML = ' days until your trip!'
 }

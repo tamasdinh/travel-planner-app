@@ -1,4 +1,4 @@
-export function durationSelector (tripID) {
+export function durationSelector (trip) {
   const selector = document.getElementById('duration-selector')
   const range = 14
   const defaultDuration = 7
@@ -13,12 +13,12 @@ export function durationSelector (tripID) {
   
   selector.appendChild(temp)
 
-  const trip = JSON.parse(localStorage.getItem(tripID))
-  selector.value = trip.duration || defaultDuration 
+  if (!trip.duration) {
+    trip.duration = defaultDuration
+  } 
+  selector.value = trip.duration
 }
 
-export function durationSubmit (event, tripID) {
-  const trip = JSON.parse(localStorage.getItem(tripID))
+export function durationSubmit (event, trip) {
   trip.duration = event.target.value
-  localStorage.setItem(tripID, JSON.stringify(trip)) 
 }

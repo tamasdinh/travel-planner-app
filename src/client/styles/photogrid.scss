@@ -1,0 +1,56 @@
+@import './base.scss';
+
+.photoshow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hero-shot {
+  position: relative;
+  text-align: center;
+  color: $themeColorLightOverlay;
+  
+  #hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    #hero-overlay-text {
+      letter-spacing: 0.1em;
+      font-size: 10em;
+    }
+    
+    p {
+      margin: 0;
+    }
+
+    #base-text {
+      font-size: 3em;
+      letter-spacing: 0.15em;
+    }
+
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+.photogrid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top: 8px;
+
+  img {
+    padding-right: 8px;
+    padding-bottom: 8px;
+    max-height: 10vh;
+  }
+
+}

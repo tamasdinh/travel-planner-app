@@ -29,9 +29,8 @@ export function getDestinations (event) {
           lng: item.lng
         })
       })
-      return results
+      resolve(results)
     })
-    .then(results => resolve(results))
     .catch(e => {
       alert('An error has occurred during fetching. Please try again later.')
       reject(e) 
@@ -76,23 +75,29 @@ export function serveDestinationOptions (event, results) {
   optDropDown.appendChild(destOptions)
 }
 
-export function destinationSubmit (tripID, destinationResults) {
+export function destinationSubmit (trip, destResults) {
   const selectionSplit = document.getElementById('destination-selector').value.split(', ')
   const destinationQuery = `${selectionSplit[0]}, ${selectionSplit[1]}`
   let images = []
+  
   return new Promise((resolve, reject) => {
-    getPhotos(tripID, destinationQuery, images)
+  
+    if (!trip.destination) {
+      trip.destination = destResults.filter(item => (
+        item.adminCode1 == selectionSplit[2] &&
+        item.name == selectionSplit[0] &&
+        item.countryName == selectionSplit[1]
+        ))[0]
+      }
+
+    if (trip.destination === undefined) {
+      reject('There was an error defining trip destination. Please try again.')
+    }
+
+    getPhotos(trip, destinationQuery, images)
     .then((images) => {
-      const trip = JSON.parse(localStorage.getItem(tripID))
-      trip.destination = destinationResults.filter(item => (
-          item.adminCode1 == selectionSplit[2] &&
-          item.name == selectionSplit[0] &&
-          item.countryName == selectionSplit[1]
-      ))[0]
       trip.images = images
-      localStorage.setItem(tripID, JSON.stringify(trip))
-      localStorage.removeItem('results')
-      resolve()
+      resolve(trip)
     })
     .catch(e => {
       alert('An error has occurred during execution.')

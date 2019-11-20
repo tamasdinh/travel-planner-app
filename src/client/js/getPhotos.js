@@ -20,18 +20,23 @@ export function getPhotos (tripID, destinationQuery, images) {
         images.push(response.hits[i].largeImageURL)
       }
       
+      const photoGrid = document.getElementById('photogrid')
+      while (photoGrid.firstChild) {
+        photoGrid.removeChild(photoGrid.firstChild)
+      }
+
+      const baseT = document.getElementById('base-text')
+      if (baseT != null) {
+        baseT.innerHTML = ''
+      }
+
       const heroShot = document.getElementById('hero-shot')
+      while (heroShot.firstChild) {
+        heroShot.removeChild(heroShot.firstChild)
+      }
       const img = document.createElement('img')
       img.src = images[0]
       heroShot.appendChild(img)
-      
-      const destination = document.getElementById('destination-selector').value.split(', ')
-      document.getElementById('hero-overlay-text').innerHTML = `${destination[0].toUpperCase()}`
-      
-      const baseText = document.createElement('p')
-      baseText.innerHTML = 'DESTINATION:'
-      baseText.id = 'base-text'
-      document.getElementById('hero-overlay').insertBefore(baseText, document.getElementById('hero-overlay').firstChild)
       
       const imgDocFragment = document.createDocumentFragment()
       for (let i = 0; i < images.length; i++) {
@@ -40,7 +45,32 @@ export function getPhotos (tripID, destinationQuery, images) {
         imgDocFragment.appendChild(img)
       }
       document.getElementById('photogrid').appendChild(imgDocFragment)
-      resolve(images)
+      return images
+    })
+    .then(images => {
+      if (images.length == 0) {
+        reject(alert('No images found in the database. Please try again.'))
+      
+      } else {
+
+        const heroOverLay = document.createElement('div')
+        heroOverLay.id = 'hero-overlay'
+        document.getElementById('hero-shot').appendChild(heroOverLay)
+        
+        const baseText = document.createElement('p')
+        baseText.innerHTML = 'DESTINATION:'
+        baseText.id = 'base-text'
+        document.getElementById('hero-overlay').insertBefore(baseText, document.getElementById('hero-overlay').firstChild)
+        
+        const heroOverLayText = document.createElement('p')
+        heroOverLayText.id = 'hero-overlay-text'
+        document.getElementById('hero-overlay').appendChild(heroOverLayText)
+        
+        const destination = document.getElementById('destination-selector').value.split(', ')
+        document.getElementById('hero-overlay-text').innerHTML = `${destination[0].toUpperCase()}`
+        
+        resolve(images)
+      }
     })
     .catch(e => {
       alert('An error occurred while fetching images. Please retry by resubmitting trip data.')

@@ -1,14 +1,11 @@
 import { serverURL, port, months, days } from './localhost'
 
-export function getWeather (tripID) {
-  
-  // console.log('tripID from getWeather:', tripID)
+export function getWeather (trip) {
 
   const endPoint = 'weather'
   
   let urlToUse = new URL(`${serverURL}:${port}/${endPoint}`)
  
-  let trip = JSON.parse(localStorage.getItem(tripID))
   let lat = trip.destination.lat
   let long = trip.destination.lng
   let startDate = new Date(`${trip.year}, ${trip.month}, ${trip.day}`).getTime()
@@ -46,9 +43,20 @@ export function getWeather (tripID) {
 }
 
 export function serveWeatherData(weatherData) {
-  console.log('Results from weatherData:', weatherData)
+  
+  const weatherResultsItem = document.getElementsByClassName('weather-results')[0]
+  while (weatherResultsItem.firstChild) {
+    weatherResultsItem.removeChild(weatherResultsItem.firstChild)
+  }
+  
+  const greeting = document.getElementById('weather-greeting')
+  if (greeting) {
+    document.body.removeChild(greeting)
+  }
+
   const weatherTitle = document.createElement('h1')
   weatherTitle.innerHTML = 'Expected weather for your trip'
+  weatherTitle.id = 'weather-greeting'
   document.getElementsByTagName('body')[0].insertBefore(
     weatherTitle, document.getElementsByClassName('weather-results')[0]
   )

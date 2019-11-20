@@ -11,6 +11,7 @@ export function loadTripData (now) {
       break
     }
   }
+  loadCountDown(JSON.parse(localStorage.getItem(tripID)))
   if (!tripID) {
     console.log('No trips saved; creating trip datastore.')
     tripID = generateTripID()
@@ -18,4 +19,9 @@ export function loadTripData (now) {
     console.log('Trip data:', JSON.parse(localStorage.getItem(tripID)))
   }
   return tripID
+}
+
+export function loadCountDown(trip) {
+  document.getElementById('sleeps').innerHTML =
+        ((new Date(trip.year, trip.month - 1, trip.day) - new Date()) / 1000 / 60 / 60 / 24 + 1).toFixed(0)
 }

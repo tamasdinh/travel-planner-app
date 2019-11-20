@@ -29,6 +29,11 @@
     margin-left: 10px;
     margin-right: 10px;
     background-color: $themeColorAccent2;
+
+    &:hover {
+      background-color: lighten($themeColorAccent2, 10%);
+    }
+
   }
 }
 
@@ -46,12 +51,22 @@ select {
   margin-right: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
+
+  &:hover {
+    background-color: lighten(#444, 10%);
+  }
+
 }
 
 button {
   background-color: #1840ad;
   color: $themeColorLight;
   border-radius: 10px;
+
+  &:hover {
+    background-color: lighten(#1840ad, 10%);
+  }
+
 
 }
 

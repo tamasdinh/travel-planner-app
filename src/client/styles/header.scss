@@ -29,5 +29,10 @@ header {
     position: absolute;
     right: 20px;
     background-color: $themeColorAccent3;
+
+    & :hover {
+      background-color: lighten(#882c08, 10%);
+    }
+
   }
 }

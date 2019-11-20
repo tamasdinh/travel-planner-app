@@ -23,11 +23,10 @@ export function weatherApp () {
       document.getElementById('destination-selector').value =
       `${trip.destination.name}, ${trip.destination.countryName}, ${trip.destination.adminCode1}`
     }
-    console.log(trip)
   })
 
   document.getElementById('destination-selector').addEventListener('input', (event) => {
-    if (event.target.value.length == 4 && prevLength < event.target.value.length) {
+    if (event.target.value.length >= 4 && prevLength < event.target.value.length) {
       getDestinations(event)
       .then(results => {
         destResults = results
@@ -69,11 +68,16 @@ export function weatherApp () {
     for (let htmlContainer of
       [document.getElementById('destination-options'),
       document.getElementById('hero-shot'),
-      document.getElementById('photogrid')]) {
+      document.getElementById('photogrid'),
+      document.getElementsByClassName('weather-results')[0]]) {
 
         while (htmlContainer.firstChild) {
           htmlContainer.removeChild(htmlContainer.firstChild)
         }
+    }
+    const h1 = document.getElementsByTagName('h1')[0]
+    if (h1) {
+      h1.innerHTML = ''
     }
     delete trip.destination
     delete trip.images

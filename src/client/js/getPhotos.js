@@ -1,4 +1,4 @@
-export function getPhotos (tripID, destinationQuery, images) {
+export function getPhotos (destinationQuery, images) {
   
   let numberOfPhotosToTake = 1 + 5 * 5 // 1 hero shot + 5x5 grid
 
@@ -15,9 +15,11 @@ export function getPhotos (tripID, destinationQuery, images) {
     fetch(urlToUse)
     .then(res => res.json())
     .then(response => {
-      numberOfPhotosToTake = Math.min(response.totalHits, numberOfPhotosToTake)
+      
+      let entity = response.entity
+      numberOfPhotosToTake = Math.min(response.response.totalHits, numberOfPhotosToTake)
       for (let i = 0; i < numberOfPhotosToTake; i++) {
-        images.push(response.hits[i].largeImageURL)
+        images.push(response.response.hits[i].largeImageURL)
       }
       
       const photoGrid = document.getElementById('photogrid')
@@ -45,9 +47,9 @@ export function getPhotos (tripID, destinationQuery, images) {
         imgDocFragment.appendChild(img)
       }
       document.getElementById('photogrid').appendChild(imgDocFragment)
-      return images
+      return [images, entity]
     })
-    .then(images => {
+    .then(array => {
       if (images.length == 0) {
         reject(alert('No images found in the database. Please try again.'))
       
@@ -67,7 +69,7 @@ export function getPhotos (tripID, destinationQuery, images) {
         document.getElementById('hero-overlay').appendChild(heroOverLayText)
         
         const destination = document.getElementById('destination-selector').value.split(', ')
-        document.getElementById('hero-overlay-text').innerHTML = `${destination[0].toUpperCase()}`
+        document.getElementById('hero-overlay-text').innerHTML = `${array[1].toUpperCase()}`
         
         resolve(images)
       }

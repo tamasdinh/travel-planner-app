@@ -94,7 +94,7 @@ export function destinationSubmit (trip, destResults) {
       reject('There was an error defining trip destination. Please try again.')
     }
 
-    getPhotos(trip, destinationQuery, images)
+    getPhotos(destinationQuery, images)
     .then((images) => {
       trip.images = images
       resolve(trip)

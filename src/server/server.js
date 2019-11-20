@@ -73,7 +73,16 @@ app.get('/photos', (req, res) => {
   fetch(urlToUse)
   .then(response => response.json())
   .then(response => {
-    res.status(200).send(response)
+    if (response.totalHits == 0) {
+      urlToUse = new URL(`${pixaBayBaseURL}/api`)
+      params.q = req.query.q.split(',')[1]
+      Object.keys(params).forEach(key => urlToUse.searchParams.append(key, params[key]))
+      fetch(urlToUse)
+      .then(response => response.json())
+      .then(response => res.status(200).send(JSON.stringify({entity: params.q, response: response})))
+    } else {
+      res.status(200).send(JSON.stringify({entity: params.q, response: response}))
+    }
   })
   .catch(e => {
     res.status(404).send(JSON.stringify({error: e}))

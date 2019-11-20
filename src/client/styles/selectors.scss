@@ -1,0 +1,60 @@
+@import './base.scss';
+
+.destination-box {
+  display: flex;
+  min-height: 10vh;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.destination-select {
+  justify-content: space-evenly;
+  flex-grow: 0.5;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5px;
+
+  & input {
+    margin-right: 5px;
+    flex-grow: 0.7;
+  }
+
+  & button {
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: $themeColorAccent3;
+  }
+}
+
+.destination-date,
+.destination-duration,
+.destination-select {
+  display: flex;
+  flex-direction: column;
+}
+
+select {
+  background-color: #444;
+  color: $themeColorLight;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: #1840ad;
+  color: $themeColorLight;
+  border-radius: 10px;
+
+}
+
+#destination-submit {
+  margin: 20px 20px 20px 20px;
+}

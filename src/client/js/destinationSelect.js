@@ -1,5 +1,6 @@
 import { getPhotos } from './getPhotos'
 import { serverURL, port } from './localhost'
+const fetch = require('node-fetch') // need this for testing purposes
 
 export function getDestinations (event) {
 

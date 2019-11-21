@@ -2,6 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 module.exports  = {
   mode: 'development',
@@ -9,14 +13,8 @@ module.exports  = {
   output: {
     path: path.resolve(__dirname, 'dist')
   },
-  devServer: {
-    writeToDisk: true,
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 8080,
-    hot: true,
-    open: 'Google Chrome',
-    stats: 'minimal'
+  optimization: {
+    minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
   },
   module: {
     rules: [
@@ -27,7 +25,7 @@ module.exports  = {
       },
       {
         test: /\.(s*)css$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -36,6 +34,8 @@ module.exports  = {
       template: './src/client/views/index.html',
       filename: './index.html'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new MiniCSSExtractPlugin({filename: '[name].css'}),
+    new WorkboxPlugin.GenerateSW()
   ]
 }

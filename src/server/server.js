@@ -1,17 +1,17 @@
 const express = require('express')
 const fetch = require('node-fetch')
-const envName = '.env' // to be updated
-//const dotenv = require('dotenv').config('../envName)
-//const port = process.env.PORT
+const dotenv = require('dotenv')
+dotenv.config('./.env')
+const port = process.env.PORT
 
 const geoNamesBaseURL = 'http://api.geonames.org'
-const geoNamesUserName = 'tamas.dinh'
+const geoNamesUserName = process.env.GEONAMES_USERNAME
 
 const pixaBayBaseURL = 'https://pixabay.com'
-const pixaBayAPIKey = '14281020-dc90b827d7e54e95a1a31315c'
+const pixaBayAPIKey = process.env.PIXABAY_APIKEY
 
 const darkSkyBaseURL = 'https://api.darksky.net'
-const darkSkyAPIKey = '2141ab2e527bbc7a8ea707265f7e7df1'
+const darkSkyAPIKey = process.env.DARKSKY_APIKEY
 
 const app = express()
 
@@ -34,7 +34,6 @@ app.get('/places', (req, res) => {
     orderBy: 'relevance',
     username: geoNamesUserName
   }
-//  console.log(req.query)
   Object.keys(params).forEach(key => urlToUse.searchParams.append(key, params[key]))
   urlToUse.searchParams.append('featureCode', 'PPLC')
 
@@ -45,8 +44,6 @@ app.get('/places', (req, res) => {
   fetch(urlToUse, {headers})
   .then(response => response.json())
   .then(response => {
-//    console.log('results:', response.totalResultsCount)
-//    console.log('results length:', response.geonames.length)
     res.status(200).send(response)
   })
   .catch(e => {
@@ -118,6 +115,6 @@ app.get('/weather', (req, res) => {
   
 })
 
-app.listen(8081, () => {
-  console.log(`Server online and listening on port ${8081}`)
+app.listen(port, () => {
+  console.log(`Server online and listening on port ${port}`)
 })

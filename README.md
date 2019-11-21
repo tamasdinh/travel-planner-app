@@ -34,9 +34,9 @@ npm install
 ```
 
 You'll have to obtain a username for GeoNames and API keys for Pixabay and DarkSky. Once done, you have to insert these into the provided ```.env_EMPTY``` file and then rename it to ```.env```.
-[Obtain Pixabay API key](https://pixabay.com/api/docs/)
-[Obtain DarkSky API key](https://darksky.net/dev)
-[Obtain GeoNames username](http://www.geonames.org/login)
+*[Obtain Pixabay API key](https://pixabay.com/api/docs/)
+*[Obtain DarkSky API key](https://darksky.net/dev)
+*[Obtain GeoNames username](http://www.geonames.org/login)
 
 Once you have dependencies installed and your API keys obtained, you have 4 options:
 

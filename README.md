@@ -33,7 +33,12 @@ Once you have the repo on your local machine, first you have to install dependen
 npm install
 ```
 
-Once you have dependencies installed, you have 4 options:
+You'll have to obtain a username for GeoNames and API keys for Pixabay and DarkSky. Once done, you have to insert these into the provided ```.env_EMPTY``` file and then rename it to ```.env```.
+[Obtain Pixabay API key](https://pixabay.com/api/docs/)
+[Obtain DarkSky API key](https://darksky.net/dev)
+[Obtain GeoNames username](http://www.geonames.org/login)
+
+Once you have dependencies installed and your API keys obtained, you have 4 options:
 
 1. Run ```npm start``` and then run ```npm run dev```:
     - the first command starts the local API bridge server and the second starts ```webpack-dev-server```. You can try out the app in development mode this way.

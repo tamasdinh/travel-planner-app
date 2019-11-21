@@ -2,6 +2,7 @@
 
 .destination-box {
   display: flex;
+  flex-direction: column;
   min-height: 10vh;
   justify-content: space-around;
   margin-top: 10px;
@@ -42,6 +43,16 @@
 .destination-select {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.selector-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-grow: 0.2;
 }
 
 select {
@@ -67,9 +78,14 @@ button {
     background-color: lighten(#1840ad, 10%);
   }
 
-
 }
 
 #destination-submit {
   margin: 20px 20px 20px 20px;
+}
+
+@media only screen and (min-width: 601px) {
+  .destination-box {
+    flex-direction: row;
+  }
 }

@@ -13,7 +13,7 @@ body {
   flex-direction: column;
   color: $font-color;
   font-family: $font-family;
-  font-size: 18px;
+  font-size: 12px;
   background-color: $themeColorDark;
 }
 
@@ -46,4 +46,16 @@ footer {
   padding-left: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 901px) {
+  body {
+    font-size: 18px;
+  }
 }

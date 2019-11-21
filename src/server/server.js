@@ -25,7 +25,6 @@ app.use((req, res, next) => {
 });
 
 app.get('/places', (req, res) => {
-  
   let urlToUse = new URL(`${geoNamesBaseURL}/search`)
   const params = {
     name_startsWith: req.query.nameStartsWith,
@@ -115,6 +114,12 @@ app.get('/weather', (req, res) => {
   
 })
 
-app.listen(port, () => {
-  console.log(`Server online and listening on port ${port}`)
-})
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Server online and listening on port ${port}`)
+  })
+}
+
+module.exports = {
+  port,
+}
